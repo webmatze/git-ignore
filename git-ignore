@@ -7,17 +7,27 @@ cmd=$1
 file=$2
 
 # If no arguments are given, show the usage
-if [ -z "$cmd" ] || [ -z "$file" ]; then
-    echo "Usage: git ignore add [file/directory]"
+if [ -z "$cmd" ]; then
+    echo "Usage: git ignore add [file/directory/pattern]"
+    echo "       git ignore show"
     exit 1
 fi
 
 # If the command is "add"
 if [ "$cmd" = "add" ]; then
-    # Append the file/directory to the .gitignore file
+    if [ -z "$file" ]; then
+        echo "Missing file/directory/pattern to ignore"
+        exit 1
+    fi
+
+    # Append the file/directory/pattern to the .gitignore file
     echo $file >> .gitignore
+elif [ "$cmd" = "show" ]; then
+    # Display the content of .gitignore file
+    cat .gitignore
 else
     echo "Unknown command: $cmd"
-    echo "Usage: git ignore add [file/directory]"
+    echo "Usage: git ignore add [file/directory/pattern]"
+    echo "       git ignore show"
 fi
 
