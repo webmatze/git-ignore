@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Name of the command
+cmd=$1
+
+# The file/directory to ignore
+file=$2
+
+# If no arguments are given, show the usage
+if [ -z "$cmd" ] || [ -z "$file" ]; then
+    echo "Usage: git ignore add [file/directory]"
+    exit 1
+fi
+
+# If the command is "add"
+if [ "$cmd" = "add" ]; then
+    # Append the file/directory to the .gitignore file
+    echo $file >> .gitignore
+else
+    echo "Unknown command: $cmd"
+    echo "Usage: git ignore add [file/directory]"
+fi
+
